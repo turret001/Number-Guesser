@@ -68,6 +68,11 @@
 let gizliNumara = Math.trunc(Math.random() * 20) + 1;
 let highscore = 0;
 let puan = 20;
+
+if (!(localStorage.getItem('highscore')) == null){
+  document.querySelector('.highscore').innerHTML = '0';
+} else {document.querySelector('.highscore').innerHTML = localStorage.getItem('highscore')}
+
 document.querySelector('.check').addEventListener('click', function () {
   const tahmin = Number(document.querySelector('.guess').value);
   console.log(tahmin, typeof tahmin);
@@ -83,6 +88,7 @@ document.querySelector('.check').addEventListener('click', function () {
       if (puan > highscore){
         highscore = puan;
         document.querySelector('.highscore').innerHTML = highscore;
+        localStorage.setItem('highscore',highscore)
       }
     //Yüksek Tahmin
   } else if (tahmin > gizliNumara) {
