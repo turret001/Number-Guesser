@@ -69,9 +69,17 @@ let gizliNumara = Math.trunc(Math.random() * 20) + 1;
 let highscore = 0;
 let puan = 20;
 
-if (localStorage.getItem('highscore') == null){
+if (localStorage.getItem('highscore') == null) {
   document.querySelector('.highscore').innerHTML = '0';
-} else {document.querySelector('.highscore').innerHTML = localStorage.getItem('highscore')}
+} else {
+  document.querySelector('.highscore').innerHTML = localStorage.getItem('highscore');
+};
+
+//Highscore Sıfırlama
+document.querySelector('.hreset').addEventListener('click', function () {
+  localStorage.setItem('highscore', 0);
+  document.querySelector('.highscore').innerHTML = localStorage.getItem('highscore');
+});
 
 document.querySelector('.check').addEventListener('click', function () {
   const tahmin = Number(document.querySelector('.guess').value);
@@ -85,39 +93,51 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('body').style.backgroundColor = '#60b347';
     document.querySelector('.number').style.width = '30rem';
     document.querySelector('.number').textContent = gizliNumara;
-      if (puan > highscore){
-        highscore = puan;
-        document.querySelector('.highscore').innerHTML = highscore;
-        localStorage.setItem('highscore',highscore)
+    if (puan > highscore) {
+      highscore = puan;
+      document.querySelector('.highscore').innerHTML = highscore;
+      localStorage.setItem('highscore', highscore);
+    }}//Tahminin yanlış olduğunda
+    else if(tahmin !== gizliNumara){
+      if (puan > 1) {
+        document.querySelector('.message').textContent = tahmin > gizliNumara ? "Çok Yüksek" : "Çok Düşük"
+        // puan = puan - 1
+        puan--;
+        document.querySelector('.score').textContent = puan;
+      } else {
+        document.querySelector('.message').textContent =
+          '2 zara 50 binlik olduk';
+        document.querySelector('.score').textContent = 0;
       }
+
+    }});
     //Yüksek Tahmin
-  } else if (tahmin > gizliNumara) {
-    if (puan > 1) {
-      document.querySelector('.message').textContent = 'Çok Yüksek';
-      // puan = puan - 1
-      puan--;
-      document.querySelector('.score').textContent = puan;
-    } else {
-      document.querySelector('.message').textContent =
-        '2 zarsa 50 binlik olduk';
-      document.querySelector('.score').textContent = 0;
-    }
-    //Düşük Tahmin
-  } else if (tahmin < gizliNumara) {
-    if (puan > 1) {
-      document.querySelector('.message').textContent = 'Çok Düşük';
-      puan--;
-      document.querySelector('.score').textContent = puan;
-    } else {
-      document.querySelector('.message').textContent = 'Oyunu kaybettin';
-      document.querySelector('.score').textContent = 0;
-    }
-  }
+  // } else if (tahmin > gizliNumara) {
+  //   if (puan > 1) {
+  //     document.querySelector('.message').textContent = 'Çok Yüksek';
+  //     // puan = puan - 1
+  //     puan--;
+  //     document.querySelector('.score').textContent = puan;
+  //   } else {
+  //     document.querySelector('.message').textContent =
+  //       '2 zarsa 50 binlik olduk';
+  //     document.querySelector('.score').textContent = 0;
+  //   }
+  //   //Düşük Tahmin
+  // } else if (tahmin < gizliNumara) {
+  //   if (puan > 1) {
+  //     document.querySelector('.message').textContent = 'Çok Düşük';
+  //     puan--;
+  //     document.querySelector('.score').textContent = puan;
+  //   } else {
+  //     document.querySelector('.message').textContent = 'Oyunu kaybettin';
+  //     document.querySelector('.score').textContent = 0;
+  //   }
   // console.log(document.querySelector('.guess').value);
   // document.querySelector('.message').textContent = 'Doğru Sayı';
-});
-document.querySelector('.again').addEventListener('click', reset)
-function reset (){
+
+document.querySelector('.again').addEventListener('click', reset);
+function reset() {
   document.querySelector('.number').textContent = '?';
   document.querySelector('.message').textContent = 'Tahmin etmeye başla...';
   document.querySelector('body').style.backgroundColor = '#222';
@@ -125,5 +145,5 @@ function reset (){
   document.querySelector('.guess').value = '';
   gizliNumara = Math.trunc(Math.random() * 20) + 1;
   puan = 20;
-  document.querySelector('.score').textContent = puan
-};
+  document.querySelector('.score').textContent = puan;
+}
