@@ -69,7 +69,7 @@ let gizliNumara = Math.trunc(Math.random() * 20) + 1;
 let highscore = 0;
 let puan = 20;
 
-if (!(localStorage.getItem('highscore')) == null){
+if (localStorage.getItem('highscore') == null){
   document.querySelector('.highscore').innerHTML = '0';
 } else {document.querySelector('.highscore').innerHTML = localStorage.getItem('highscore')}
 
