@@ -76,7 +76,7 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('.message').textContent = 'Sayı yok';
     //Oyuncu Kazanır
   } else if (tahmin === gizliNumara) {
-    document.querySelector('.message').textContent = 'Doğru Sayı';
+    document.querySelector('.message').textContent = 'Doğru Sayı!';
     document.querySelector('body').style.backgroundColor = '#60b347';
     document.querySelector('.number').style.width = '30rem';
     document.querySelector('.number').textContent = gizliNumara;
@@ -109,7 +109,7 @@ document.querySelector('.check').addEventListener('click', function () {
 document.querySelector('.again').addEventListener('click', reset)
 function reset (){
   document.querySelector('.number').textContent = '?';
-  document.querySelector('.message').textContent = 'Start guessing...';
+  document.querySelector('.message').textContent = 'Tahmin etmeye başla...';
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
   document.querySelector('.guess').value = '';
